@@ -12,7 +12,7 @@ public class CheckIfThePlayerIsWathcingTheCube : MonoBehaviour
         _transform = transform;
         Vector3 forward = _camera.transform.forward;
         Vector3 cubeForward = _transform.TransformDirection();
-        // Trebam projekciju iz kocke prema kameri i koristiti dot operator da bi ih usporedio.
+        // Trebam projekciju iz kocke prema kameri i koristiti dot operator da bi ih usporedio.q
     }
 
     private void Update()
