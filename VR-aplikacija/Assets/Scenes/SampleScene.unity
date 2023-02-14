@@ -1951,6 +1951,12 @@ MonoBehaviour:
   newMaterial: {fileID: 2100000, guid: 4820ff2c5f80e414f8c53834e175a686, type: 2}
   oldMaterial: {fileID: 2100000, guid: d187c075a044bb14daf66021642edd4f, type: 2}
   _renderer: {fileID: 1206604438}
+--- !u!95 &1236784686 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95024934887329368, guid: ba1fa4a8c66106b4988c88fe4b8e8502,
+    type: 3}
+  m_PrefabInstance: {fileID: 702599693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246989030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,7 +3099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c644c6b7804399243832c1b8c33307e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_animator: {fileID: 603079954}
+  m_animator: {fileID: 1236784686}
   GripAction:
     m_UseReference: 1
     m_Action:
@@ -3204,8 +3210,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 2841133684394947652, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
-      type: 3}
+    m_Reference: {fileID: 0}
   ThumbAction:
     m_UseReference: 0
     m_Action:
