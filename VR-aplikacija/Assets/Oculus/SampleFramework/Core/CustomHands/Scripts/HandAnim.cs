@@ -5,12 +5,18 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro; // Add the TextMesh Pro namespace to access the various functions.
 using System.Linq;
+using UnityEngine.InputSystem;
+using System;
 
 public class HandAnim : MonoBehaviour
 {
-    //public ActionBasedController controller;
-    public XRController controller = null;
     public Animator m_animator = null;
+    [Header("Input")]
+    [SerializeField] public InputActionProperty GripAction;
+    [SerializeField] public InputActionProperty TriggerAction;
+    [SerializeField] public InputActionProperty IndexAction;
+    [SerializeField] public InputActionProperty ThumbAction;
+
 
     public const string ANIM_LAYER_NAME_POINT = "Point Layer";
     public const string ANIM_LAYER_NAME_THUMB = "Thumb Layer";
@@ -29,12 +35,23 @@ public class HandAnim : MonoBehaviour
     private float triggerCap_state = 0f;
     private float thumbCap_state = 0f;
 
+    private void Reset()
+    {
+        m_animator = GetComponentInChildren<Animator>();
+    }
+
     private void Awake()
     {
-        // animator =
-        // controller.GetComponent<XRController>();
+        GripAction.action.performed += GripActionPerformed;
+        TriggerAction.action.performed += TriggerActionPerformed;
+        IndexAction.action.performed += IndexActionPerformed;
+        ThumbAction.action.performed += ThumbActionPerformed;
+        GripAction.action.Enable();
+        TriggerAction.action.Enable();
+        IndexAction.action.Enable();
+        ThumbAction.action.Enable();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         m_colliders = this.GetComponentsInChildren<Collider>().Where(childCollider => !childCollider.isTrigger).ToArray();
@@ -48,84 +65,48 @@ public class HandAnim : MonoBehaviour
         m_animLayerIndexThumb = m_animator.GetLayerIndex(ANIM_LAYER_NAME_THUMB);
         m_animParamIndexFlex = Animator.StringToHash(ANIM_PARAM_NAME_FLEX);
         m_animParamIndexPose = Animator.StringToHash(ANIM_PARAM_NAME_POSE);
-
-        // var inputDevices = new List<UnityEngine.XR.InputDevice>();
-        // UnityEngine.XR.InputDevices.GetDevices(inputDevices);
-        //
-        // foreach (var device in inputDevices)
-        // {
-        //     Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-        //     solutionText.SetText(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-        //
-        // }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ThumbActionPerformed(InputAction.CallbackContext obj)
     {
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.grip, out float gripTarget))
+        CalculateState(obj.ReadValue<float>(), ref thumbCap_state);
+        m_animator.SetLayerWeight(m_animLayerIndexThumb, 1f - thumbCap_state);
+    }
+
+    private void IndexActionPerformed(InputAction.CallbackContext obj)
+    {
+        CalculateState(obj.ReadValue<float>(), ref triggerCap_state);
+        m_animator.SetLayerWeight(m_animLayerIndexPoint, 1f - triggerCap_state);
+    }
+
+    private void TriggerActionPerformed(InputAction.CallbackContext obj)
+    {
+        CalculateState(obj.ReadValue<float>(), ref trigger_state);
+        m_animator.SetFloat("Pinch", trigger_state);
+    }
+
+    private void GripActionPerformed(InputAction.CallbackContext obj)
+    {
+        CalculateState(obj.ReadValue<float>(), ref grip_state);
+        m_animator.SetFloat(m_animParamIndexFlex, grip_state);
+    }
+
+    private void CalculateState(float value, ref float state)
+    {
+        Debug.Log("value " + value);
+        Debug.Log("state " + state);
+        var delta = value - state;
+        if (delta > 0f)
         {
-            // solutionText.SetText(gripValue.ToString());
-            float grip_state_delta = gripTarget - grip_state;
-            if (grip_state_delta > 0f)
-            {
-                grip_state = Mathf.Clamp(grip_state + 1 / anim_frames, 0f, gripTarget);
-            }
-            else if (grip_state_delta < 0f)
-            {
-                grip_state = Mathf.Clamp(grip_state - 1 / anim_frames, gripTarget, 1f);
-            }
-            else { grip_state = gripTarget; }
-
-            m_animator.SetFloat(m_animParamIndexFlex, grip_state);
+            state = Mathf.Clamp(state + 1 / anim_frames, 0f, value);
         }
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerTarget))
+        else if (delta < 0f)
         {
-
-            float trigger_state_delta = triggerTarget - trigger_state;
-            if (trigger_state_delta > 0f)
-            {
-                trigger_state = Mathf.Clamp(trigger_state + 1 / anim_frames, 0f, triggerTarget);
-            }
-            else if (trigger_state_delta < 0f)
-            {
-                trigger_state = Mathf.Clamp(trigger_state - 1 / anim_frames, triggerTarget, 1f);
-            }
-            else { trigger_state = triggerTarget; }
-
-            m_animator.SetFloat("Pinch", trigger_state);
+            state = Mathf.Clamp(state - 1 / anim_frames, value, 1f);
         }
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.indexTouch, out float triggerCapTarget))
+        else
         {
-            float triggerCap_state_delta = triggerCapTarget - triggerCap_state;
-            if (triggerCap_state_delta > 0f)
-            {
-                triggerCap_state = Mathf.Clamp(triggerCap_state + 1 / anim_frames, 0f, triggerCapTarget);
-            }
-            else if (triggerCap_state_delta < 0f)
-            {
-                triggerCap_state = Mathf.Clamp(triggerCap_state - 1 / anim_frames, triggerCapTarget, 1f);
-            }
-            else { triggerCap_state = triggerCapTarget; }
-            m_animator.SetLayerWeight(m_animLayerIndexPoint, 1f - triggerCap_state);
+            state = value;
         }
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.thumbTouch, out float thumbCapTarget))
-        {
-            float thumbCap_state_delta = thumbCapTarget - thumbCap_state;
-            if (thumbCap_state_delta > 0f)
-            {
-                thumbCap_state = Mathf.Clamp(thumbCap_state + 1 / anim_frames, 0f, thumbCapTarget);
-            }
-            else if (thumbCap_state_delta < 0f)
-            {
-                thumbCap_state = Mathf.Clamp(thumbCap_state - 1 / anim_frames, thumbCapTarget, 1f);
-            }
-            else { thumbCap_state = thumbCapTarget; }
-            m_animator.SetLayerWeight(m_animLayerIndexThumb, 1f - thumbCap_state);
-        }
-
-
-
-
     }
 }
