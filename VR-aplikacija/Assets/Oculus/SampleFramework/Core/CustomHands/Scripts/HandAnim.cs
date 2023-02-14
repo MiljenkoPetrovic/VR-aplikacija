@@ -16,6 +16,7 @@ public class HandAnim : MonoBehaviour
     [SerializeField] public InputActionProperty TriggerAction;
     [SerializeField] public InputActionProperty IndexAction;
     [SerializeField] public InputActionProperty ThumbAction;
+    [SerializeField] public InputActionAsset inputActionAsset;
 
 
     public const string ANIM_LAYER_NAME_POINT = "Point Layer";
@@ -40,16 +41,30 @@ public class HandAnim : MonoBehaviour
         m_animator = GetComponentInChildren<Animator>();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
+        inputActionAsset.Enable();
         GripAction.action.performed += GripActionPerformed;
         TriggerAction.action.performed += TriggerActionPerformed;
-        IndexAction.action.performed += IndexActionPerformed;
-        ThumbAction.action.performed += ThumbActionPerformed;
+        //IndexAction.action.performed += IndexActionPerformed;
+        //ThumbAction.action.performed += ThumbActionPerformed;
         GripAction.action.Enable();
         TriggerAction.action.Enable();
         IndexAction.action.Enable();
         ThumbAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActionAsset.Disable();
+        GripAction.action.performed -= GripActionPerformed;
+        TriggerAction.action.performed -= TriggerActionPerformed;
+        //IndexAction.action.performed -= IndexActionPerformed;
+        //ThumbAction.action.performed -= ThumbActionPerformed;
+        GripAction.action.Disable();
+        TriggerAction.action.Disable();
+        IndexAction.action.Disable();
+        ThumbAction.action.Disable();
     }
 
     void Start()
@@ -93,8 +108,6 @@ public class HandAnim : MonoBehaviour
 
     private void CalculateState(float value, ref float state)
     {
-        Debug.Log("value " + value);
-        Debug.Log("state " + state);
         var delta = value - state;
         if (delta > 0f)
         {

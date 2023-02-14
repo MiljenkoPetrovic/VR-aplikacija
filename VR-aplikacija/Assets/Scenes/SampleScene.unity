@@ -451,7 +451,6 @@ GameObject:
   - component: {fileID: 430211791}
   - component: {fileID: 430211790}
   - component: {fileID: 430211794}
-  - component: {fileID: 430211795}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -798,8 +797,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 1711290892}
-  m_ModelParent: {fileID: 430211789}
+  m_ModelPrefab: {fileID: 0}
+  m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -973,68 +972,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
---- !u!114 &430211795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430211788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c644c6b7804399243832c1b8c33307e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 1236784686}
-  GripAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Grip
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 456dbfdc-5265-495c-839e-98261be44cb8
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  TriggerAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 178983a9-1168-44b3-90ef-e0736497289c
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  IndexAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Index
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 0f010f8e-1485-4db1-88b1-a20c55a0b75a
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  ThumbAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Thumb
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 1ffd577b-1189-4809-a93a-9658be45a76b
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  anim_frames: 4
 --- !u!1 &523476955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,11 +1068,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 11434164, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477634, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11477634, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
       propertyPath: m_parentTransform
       value: 
       objectReference: {fileID: 430211789}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11434164, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
+    - {fileID: 11477634, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ba1fa4a8c66106b4988c88fe4b8e8502, type: 3}
 --- !u!1 &881060127
 GameObject:
@@ -2004,12 +1951,6 @@ MonoBehaviour:
   newMaterial: {fileID: 2100000, guid: 4820ff2c5f80e414f8c53834e175a686, type: 2}
   oldMaterial: {fileID: 2100000, guid: d187c075a044bb14daf66021642edd4f, type: 2}
   _renderer: {fileID: 1206604438}
---- !u!95 &1236784686 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95024934887329368, guid: ba1fa4a8c66106b4988c88fe4b8e8502,
-    type: 3}
-  m_PrefabInstance: {fileID: 702599693}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246989030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,7 +2043,9 @@ PrefabInstance:
       propertyPath: m_parentTransform
       value: 
       objectReference: {fileID: 1709406957}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11427812, guid: e6ba3498ffa1e534b91a07264266e6b8, type: 3}
+    - {fileID: 11438496, guid: e6ba3498ffa1e534b91a07264266e6b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e6ba3498ffa1e534b91a07264266e6b8, type: 3}
 --- !u!4 &1293096852 stripped
 Transform:
@@ -2822,7 +2765,6 @@ GameObject:
   - component: {fileID: 1709406962}
   - component: {fileID: 1709406963}
   - component: {fileID: 1709406964}
-  - component: {fileID: 1709406965}
   m_Layer: 0
   m_Name: LeftHandtController
   m_TagString: Untagged
@@ -2861,8 +2803,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 1293096852}
-  m_ModelParent: {fileID: 1709406957}
+  m_ModelPrefab: {fileID: 0}
+  m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -3054,7 +2996,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 1293096852}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -3127,13 +3069,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1709406965
+--- !u!4 &1711290892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 422740, guid: ba1fa4a8c66106b4988c88fe4b8e8502,
+    type: 3}
+  m_PrefabInstance: {fileID: 702599693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2024257536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 195418, guid: ba1fa4a8c66106b4988c88fe4b8e8502,
+    type: 3}
+  m_PrefabInstance: {fileID: 702599693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2024257540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709406956}
+  m_GameObject: {fileID: 2024257536}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c644c6b7804399243832c1b8c33307e0, type: 3}
@@ -3151,7 +3105,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -681151063944262417, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
+    m_Reference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   TriggerAction:
     m_UseReference: 1
@@ -3164,10 +3118,10 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -2775837120590753941, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
+    m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   IndexAction:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Index
       m_Type: 0
@@ -3191,10 +3145,79 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  anim_frames: 4
---- !u!4 &1711290892 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 422740, guid: ba1fa4a8c66106b4988c88fe4b8e8502,
+  inputActionAsset: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  m_PrefabInstance: {fileID: 702599693}
+  anim_frames: 4
+--- !u!1 &2074609706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 143668, guid: e6ba3498ffa1e534b91a07264266e6b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1263497693}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2074609708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074609706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c644c6b7804399243832c1b8c33307e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 603079954}
+  GripAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grip
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e4085260-0b7a-4fd0-b977-3a784eb870b5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  TriggerAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Trigger
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 1344dec5-4b21-4617-82b3-aa43115eb984
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  IndexAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Index
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9cd5c940-5a28-4635-a94e-439db0ee833d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2841133684394947652, guid: da2b439d1a2de5c46a4f428f8cf4fe19,
+      type: 3}
+  ThumbAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Thumb
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2624658c-699d-477a-a83b-b6aff387cfb2
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  inputActionAsset: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  anim_frames: 4
